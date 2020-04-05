@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Repository
 public class ProgrammerRepositoryImpl implements ProgrammerRepository {
 
-    private static final String REDIS_LIST_KEY = "";
+    private static final String REDIS_LIST_KEY = "ProgrammerList";
 
     private final RedisTemplate<String, Object> redisTemplate;
     private final @Qualifier("listOperations") ListOperations<String, Programmer> listOperations;
