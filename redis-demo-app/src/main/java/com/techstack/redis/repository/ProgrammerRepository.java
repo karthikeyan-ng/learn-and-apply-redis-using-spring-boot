@@ -3,6 +3,7 @@ package com.techstack.redis.repository;
 import com.techstack.redis.model.Programmer;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProgrammerRepository {
 
@@ -17,4 +18,12 @@ public interface ProgrammerRepository {
     List<Programmer> getProgrammersListMembers();
 
     Long getProgrammersListCount();
+
+    // Set
+    void addToProgrammersSet(Programmer... programmers);
+
+    Set<Programmer> getProgrammersSetMembers();
+
+    boolean isSetMember(Programmer programmer);
+
 }

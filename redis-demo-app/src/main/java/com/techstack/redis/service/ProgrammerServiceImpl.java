@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -36,5 +37,20 @@ public class ProgrammerServiceImpl implements ProgrammerService {
     @Override
     public Long getProgrammersListCount() {
         return repository.getProgrammersListCount();
+    }
+
+    @Override
+    public void addToProgrammersSet(Programmer... programmers) {
+        repository.addToProgrammersSet(programmers);
+    }
+
+    @Override
+    public Set<Programmer> getProgrammersSetMembers() {
+        return repository.getProgrammersSetMembers();
+    }
+
+    @Override
+    public boolean isSetMember(Programmer programmer) {
+        return repository.isSetMember(programmer);
     }
 }

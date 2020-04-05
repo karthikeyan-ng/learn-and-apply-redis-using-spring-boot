@@ -3,6 +3,7 @@ package com.techstack.redis.service;
 import com.techstack.redis.model.Programmer;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProgrammerService {
 
@@ -15,4 +16,10 @@ public interface ProgrammerService {
     List<Programmer> getProgrammersListMembers();
 
     Long getProgrammersListCount();
+
+    void addToProgrammersSet(Programmer... programmers);
+
+    Set<Programmer> getProgrammersSetMembers();
+
+    boolean isSetMember(Programmer programmer);
 }

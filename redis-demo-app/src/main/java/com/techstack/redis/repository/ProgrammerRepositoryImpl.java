@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
@@ -15,9 +17,11 @@ import java.util.concurrent.TimeUnit;
 public class ProgrammerRepositoryImpl implements ProgrammerRepository {
 
     private static final String REDIS_LIST_KEY = "ProgrammerList";
+    private static final String REDIS_SET_KEY = "ProgrammerSet";
 
     private final RedisTemplate<String, Object> redisTemplate;
     private final @Qualifier("listOperations") ListOperations<String, Programmer> listOperations;
+    private final @Qualifier("setOperations") SetOperations<String, Programmer> setOperations;
 
     /** ============= String =========== */
 
@@ -47,5 +51,20 @@ public class ProgrammerRepositoryImpl implements ProgrammerRepository {
     @Override
     public Long getProgrammersListCount() {
         return listOperations.size(REDIS_LIST_KEY);
+    }
+
+    @Override
+    public void addToProgrammersSet(Programmer... programmers) {
+        setOperations.add(REDIS_SET_KEY, programmers);
+    }
+
+    @Override
+    public Set<Programmer> getProgrammersSetMembers() {
+        return setOperations.members(REDIS_SET_KEY);
+    }
+
+    @Override
+    public boolean isSetMember(Programmer programmer) {
+        return setOperations.isMember(REDIS_SET_KEY, programmer);
     }
 }
