@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class ProgrammerController {
@@ -29,5 +31,21 @@ public class ProgrammerController {
     @GetMapping("/programmer-string/{id}")
     public ResponseEntity<String> readString(@PathVariable String id) {
         return ResponseEntity.ok().body(programmerService.getProgrammerAsString(id));
+    }
+
+    @PostMapping("/programmers-list")
+    public ResponseEntity addToProgrammerList(@RequestBody Programmer programmer) {
+        programmerService.addToProgrammersList(programmer);
+        return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping("/programmers-list")
+    public ResponseEntity<List<Programmer>> addToProgrammerList() {
+        return ResponseEntity.ok().body(programmerService.getProgrammersListMembers());
+    }
+
+    @GetMapping("/programmers-list/count")
+    public ResponseEntity<Long> getProgrammersListCount() {
+        return ResponseEntity.ok().body(programmerService.getProgrammersListCount());
     }
 }
