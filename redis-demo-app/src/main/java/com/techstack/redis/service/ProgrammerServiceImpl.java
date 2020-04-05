@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -52,5 +53,30 @@ public class ProgrammerServiceImpl implements ProgrammerService {
     @Override
     public boolean isSetMember(Programmer programmer) {
         return repository.isSetMember(programmer);
+    }
+
+    @Override
+    public void saveHash(Programmer programmer) {
+        repository.saveHash(programmer);
+    }
+
+    @Override
+    public void updateHash(Programmer programmer) {
+        repository.updateHash(programmer);
+    }
+
+    @Override
+    public Map<Integer, Programmer> findAllHash() {
+        return repository.findAllHash();
+    }
+
+    @Override
+    public Programmer findInHash(int id) {
+        return repository.findInHash(id);
+    }
+
+    @Override
+    public void deleteHash(int id) {
+        repository.deleteHash(id);
     }
 }
